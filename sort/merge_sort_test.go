@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestInsertionSort(t *testing.T) {
+func TestMargeSort(t *testing.T) {
 	tests := map[string]struct {
 		in  []int
 		out []int
@@ -26,7 +26,7 @@ func TestInsertionSort(t *testing.T) {
 
 	for k, test := range tests {
 		t.Run(k, func(t *testing.T) {
-			InsertionSort(test.in)
+			MargeSort(test.in, 0, len(test.in)-1)
 			if !reflect.DeepEqual(test.in, test.out) {
 				t.Errorf("actual: %v, expected: %v", test.in, test.out)
 			}

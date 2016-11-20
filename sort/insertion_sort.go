@@ -1,4 +1,4 @@
-package main
+package sort
 
 // InsertionSort sorts slice of int by insertion sort
 func InsertionSort(nums []int) {
