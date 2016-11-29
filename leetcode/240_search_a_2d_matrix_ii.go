@@ -1,17 +1,18 @@
 package leetcode
 
 func searchMatrix(matrix [][]int, target int) bool {
-	for _, nums := range matrix {
-		left, right := 0, len(nums)-1
-		for left <= right {
-			mid := (left + right) / 2
-			if nums[mid] == target {
-				return true
-			} else if nums[mid] < target {
-				left = mid + 1
-			} else {
-				right = mid - 1
-			}
+	if matrix == nil || len(matrix) == 0 || len(matrix[0]) == 0 {
+		return false
+	}
+
+	col, row := len(matrix[0])-1, 0
+	for col >= 0 && row < len(matrix) {
+		if matrix[row][col] == target {
+			return true
+		} else if matrix[row][col] < target {
+			row++
+		} else {
+			col--
 		}
 	}
 	return false
