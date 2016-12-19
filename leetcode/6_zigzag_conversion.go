@@ -6,22 +6,23 @@ func convert(s string, numRows int) string {
 		return s
 	}
 
-	strs := make([][]rune, numRows)
-	diff := numRows - 2
+	bs := make([][]byte, numRows)
 
-	for i, c := range s {
-		p := i % (numRows + diff)
-		if p < numRows {
-			strs[p] = append(strs[p], c)
-		} else {
-			p = (p - numRows - diff) * -1
-			strs[p] = append(strs[p], c)
+	i := 0
+	for i < len(s) {
+		for j := 0; i < len(s) && j < numRows; j++ {
+			bs[j] = append(bs[j], s[i])
+			i++
+		}
+		for j := numRows - 2; i < len(s) && j > 0; j-- {
+			bs[j] = append(bs[j], s[i])
+			i++
 		}
 	}
 
-	res := ""
-	for _, r := range strs {
-		res += string(r)
+	var res []byte
+	for _, b := range bs {
+		res = append(res, b...)
 	}
-	return res
+	return string(res)
 }
