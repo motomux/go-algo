@@ -1,24 +1,27 @@
 package leetcode
 
 // 345. Reverse Vowels of a String
-func reverseVowels(s string) string {
-	res := make([]byte, 0)
-	vowels := make([]byte, 0)
-	for i := 0; i < len(s); i++ {
-		switch b := s[i]; b {
-		case 'a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O':
-			vowels = append(vowels, b)
-		}
-	}
 
-	for i, k := 0, len(vowels)-1; i < len(s); i++ {
-		switch b := s[i]; b {
-		case 'a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O':
-			res = append(res, vowels[k])
-			k--
-		default:
-			res = append(res, b)
+func reverseVowels(s string) string {
+	res := make([]byte, len(s))
+	copy(res, s)
+	vowels := map[byte]bool{'a': true, 'i': true, 'u': true, 'e': true, 'o': true, 'A': true, 'I': true, 'U': true, 'E': true, 'O': true}
+	for i, k := 0, len(s)-1; i < k; {
+		for i < k {
+			if _, ok := vowels[s[i]]; ok {
+				break
+			}
+			i++
 		}
+		for i < k {
+			if _, ok := vowels[s[k]]; ok {
+				break
+			}
+			k--
+		}
+		res[i], res[k] = res[k], res[i]
+		i++
+		k--
 	}
 	return string(res)
 }
